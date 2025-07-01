@@ -20,4 +20,34 @@ const uploadFile = async (req, res) => {
   }
 };
 
-module.exports = { uploadFile };
+// get all files
+const getFiles = async (req, res) => {
+  try {
+    const files = await File.find({ user: req.user._id });
+    res.status(200).json(files);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// delete all files
+const deleteFiles = async (req, res) => {
+  try {
+    const file = await File.findById(req.params.id);
+
+    if (!file) {
+      return res.status(404).json({ error: "File not found" });
+    }
+
+    if (file.user.toString() !== req.user.id)
+      return res.status(403).json({ message: "Unauthorized" });
+
+    await cloudinary.uploader.destroy(file.public_id);
+    await file.deleteOne();
+    res.json({ message: "File deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { uploadFile, getFiles, deleteFiles };
