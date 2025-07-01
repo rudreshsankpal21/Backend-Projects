@@ -5,15 +5,16 @@ const {
   deleteFiles,
 } = require("../controllers/fileController");
 const authMiddleware = require("../middlewares/authMiddleware");
+const upload = require("../middlewares/multerMiddleware");
 const fileRoutes = express.Router();
 
 // Upload file
-fileRoutes.post("/upload", authMiddleware, uploadFile);
+fileRoutes.post("/upload", authMiddleware, upload.single("file"), uploadFile);
 
 // Get all files
-fileRoutes.get("/files", authMiddleware, getFiles);
+fileRoutes.get("/", authMiddleware, getFiles);
 
 // Delete file
-fileRoutes.delete("/files/:id", authMiddleware, deleteFiles);
+fileRoutes.delete("/:id", authMiddleware, deleteFiles);
 
 module.exports = fileRoutes;

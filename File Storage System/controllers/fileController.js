@@ -1,5 +1,6 @@
 const cloudinary = require("../config/cloudinary");
 const File = require("../models/File");
+const path = require("path");
 const uploadFile = async (req, res) => {
   try {
     // get the file via multer
@@ -9,7 +10,7 @@ const uploadFile = async (req, res) => {
       name: req.file.originalname,
       url: result.secure_url,
       public_id: result.public_id,
-      mimeType: result.mimetype,
+      mimeType: req.file.mimetype,
       size: result.bytes,
       user: req.user._id,
     });
@@ -38,9 +39,6 @@ const deleteFiles = async (req, res) => {
     if (!file) {
       return res.status(404).json({ error: "File not found" });
     }
-
-    if (file.user.toString() !== req.user.id)
-      return res.status(403).json({ message: "Unauthorized" });
 
     await cloudinary.uploader.destroy(file.public_id);
     await file.deleteOne();
