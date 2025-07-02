@@ -125,6 +125,10 @@ npm run dev
 
 ---
 
+## Further modifications
+
+[ ] Add Analytics
+
 ## ✨ Author
 
 Rudresh ❤️ –
