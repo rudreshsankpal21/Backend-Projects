@@ -7,6 +7,8 @@ const {
   deleteShortUrl,
 } = require("../controllers/urlController");
 
-urlRouter.post("/api/shorten", createShortUrl);
+urlRouter.post("/shorten", createShortUrl);
+urlRouter.post("/s/:shortId", getShortUrl);
+urlRouter.delete("/s/:shortId", deleteShortUrl);
 
 module.exports = urlRouter;

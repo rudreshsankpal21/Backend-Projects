@@ -29,4 +29,32 @@ const createShortUrl = async (req, res) => {
   }
 };
 
-module.exports = { createShortUrl, getShortUrl };
+// get short url
+const getShortUrl = async (req, res) => {
+  const { shortId } = req.params.id;
+  try {
+    const shortUrl = await ShortUrl.findOne({ shortId });
+    if (!shortUrl) {
+      return res.status(404).json({ message: "Short URL not found" });
+    }
+    res.redirect(shortUrl.originalUrl);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// delete short url
+const deleteShortUrl = async (req, res) => {
+  const { shortId } = req.params.id;
+  try {
+    const shortUrl = await ShortUrl.findOneAndDelete({ shortId });
+    if (!shortUrl) {
+      return res.status(404).json({ message: "Short URL not found" });
+    }
+    res.status(200).json({ message: "Short URL deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createShortUrl, getShortUrl, deleteShortUrl };
