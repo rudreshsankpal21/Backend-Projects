@@ -1,5 +1,5 @@
+const Click = require("../models/Click");
 const ShortUrl = require("../models/ShortUrl");
-
 // create short url
 const createShortUrl = async (req, res) => {
   const { originalUrl } = req.body;
@@ -31,12 +31,22 @@ const createShortUrl = async (req, res) => {
 
 // get short url
 const getShortUrl = async (req, res) => {
-  const { shortId } = req.params.id;
+  const { shortId } = req.params;
   try {
     const shortUrl = await ShortUrl.findOne({ shortId });
     if (!shortUrl) {
       return res.status(404).json({ message: "Short URL not found" });
     }
+
+    // User's IP
+    const ipAddress = req.ip;
+
+    // User's User-Agent
+    const userAgent = req.headers["user-agent"];
+
+    // Create a new click
+    await Click.create({ shortUrl: shortUrl._id, ipAddress, userAgent });
+
     res.redirect(shortUrl.originalUrl);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
