@@ -35,32 +35,6 @@ url-shortener/
 
 ````
 
----
-
-## 🔐 Models Overview
-
-### 📄 ShortUrl
-
-```js
-{
-  originalUrl: String,
-  shortId: String,
-  createdAt: Date (auto via timestamps)
-}
-```
-
-### 📄 Click
-
-```js
-{
-  shortUrl: ObjectId (ref to ShortUrl),
-  ipAddress: String,
-  userAgent: String,
-  createdAt: Date (auto via timestamps)
-}
-```
-
----
 
 ## 📥 API Endpoints
 
@@ -102,15 +76,6 @@ Redirects to the original URL and logs:
 - **Express.js**
 - **MongoDB + Mongoose**
 - **User-Agent + IP logging**
-
----
-
-## 💡 Possible Future Upgrades
-
-- 🔐 Auth for URL ownership
-- 📊 Admin dashboard to view analytics
-- 🌍 GeoIP-based location tracking
-- 📈 Charts & graphs if frontend added
 
 ---
 
