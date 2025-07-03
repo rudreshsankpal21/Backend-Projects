@@ -11,3 +11,5 @@ categoryRouter.get("/", getAllCategories);
 
 // get posts by category slug
 categoryRouter.get("/:slug", authMiddleware, getPostsByCategorySlug);
+
+module.exports = categoryRouter;
