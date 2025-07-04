@@ -4,6 +4,7 @@ const isAdmin = require("../middlewares/isAdmin");
 const {
   createCategory,
   getAllCategories,
+  getPostsByCategorySlug,
 } = require("../controllers/categoryController");
 const categoryRouter = express.Router();
 

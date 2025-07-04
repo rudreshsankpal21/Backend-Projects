@@ -38,4 +38,20 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { createCategory, getAllCategories };
+// getCategoryBySlug
+const getPostsByCategorySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    // Populate all posts under that category
+    const category = await CategoryModel.findOne({ slug }).populate("posts");
+    if (!category) {
+      res.status(404).json({ message: "Category not found" });
+    }
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createCategory, getAllCategories, getPostsByCategorySlug };
