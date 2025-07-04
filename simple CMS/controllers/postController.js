@@ -21,4 +21,30 @@ const createPost = async (req, res) => {
   }
 };
 
-module.exports = { createPost };
+const getAllPosts = async (req, res) => {
+  try {
+    const { search } = req.query;
+
+    // Build dynamic query
+    let queryObj = {};
+
+    if (search) {
+      queryObj = {
+        $or: [
+          { title: { $regex: search, $options: "i" } },
+          { content: { $regex: search, $options: "i" } },
+        ],
+      };
+    }
+
+    const posts = await PostModel.find(queryObj)
+      .populate("category")
+      .populate("author", "name email");
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createPost, getAllPosts };
