@@ -20,9 +20,9 @@ postRouter.get("/", authMiddleware, getAllPosts);
 postRouter.get("/:id", authMiddleware, getPostById);
 
 // update post
-postRouter.put("/:id", authMiddleware, isAdmin, updatePost);
+postRouter.put("/:id", authMiddleware, updatePost);
 
 // delete post
-postRouter.delete("/:id", authMiddleware, isAdmin, deletePost);
+postRouter.delete("/:id", authMiddleware, deletePost);
 
 module.exports = postRouter;

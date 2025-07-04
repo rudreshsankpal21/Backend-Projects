@@ -83,7 +83,7 @@ const updatePost = async (req, res) => {
     }
 
     // check if the post belongs to the user
-    if (post.author.toString() !== req.user._id.toString()) {
+    if (post.author !== req.user._id) {
       return res.status(403).json({ message: "You are not authorized" });
     }
     await post.save();
@@ -103,7 +103,7 @@ const deletePost = async (req, res) => {
     }
 
     // check if the post belongs to the user
-    if (post.author.toString() !== req.user._id.toString()) {
+    if (post.author !== req.user._id) {
       return res.status(403).json({ message: "You are not authorized" });
     }
 
