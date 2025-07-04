@@ -4,6 +4,7 @@ const {
   createPost,
   getAllPosts,
   getPostById,
+  updatePost,
 } = require("../controllers/postController");
 const isAdmin = require("../middlewares/isAdmin");
 const postRouter = express.Router();

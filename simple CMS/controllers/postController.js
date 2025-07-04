@@ -86,4 +86,4 @@ const updatePost = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exports = { createPost, getAllPosts, getPostById };
+module.exports = { createPost, getAllPosts, getPostById, updatePost };
