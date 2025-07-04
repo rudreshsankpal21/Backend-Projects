@@ -8,13 +8,19 @@ const createPost = async (req, res) => {
 
     // generate slug from title
     const slug = title.toLowerCase().replace(/ /g, "-");
-    post.slug = slug;
 
-    const post = await PostModel.create({ title, content, category, author });
+    const post = await PostModel.create({
+      title,
+      content,
+      category,
+      author,
+      slug,
+    });
+
     if (!post) {
-      res.status(400).json({ message: "Post not created" });
+      return res.status(400).json({ message: "Post not created" });
     }
-    await post.save();
+
     res.status(201).json({ message: "Post created successfully", post });
   } catch (error) {
     res.status(500).json({ message: error.message });
