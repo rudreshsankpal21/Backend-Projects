@@ -16,6 +16,12 @@ const categorySchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
   },
   {
     timestamps: true,

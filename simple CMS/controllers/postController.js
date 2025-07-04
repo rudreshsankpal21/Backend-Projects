@@ -1,3 +1,4 @@
+const CategoryModel = require("../models/Category");
 const PostModel = require("../models/Post");
 
 // create post
@@ -6,13 +7,19 @@ const createPost = async (req, res) => {
   try {
     const author = req.user._id;
 
+    // Check if category exists
+    const foundCategory = await CategoryModel.findOne({ slug: categorySlug });
+    if (!foundCategory) {
+      return res.status(400).json({ message: "Invalid category ID" });
+    }
+
     // generate slug from title
     const slug = title.toLowerCase().replace(/ /g, "-");
 
     const post = await PostModel.create({
       title,
       content,
-      category,
+      category: foundCategory._id,
       author,
       slug,
     });
