@@ -1,8 +1,9 @@
 const CategoryModel = require("../models/Category");
 
+// create new category
 const createCategory = async (req, res) => {
-  const { name, description } = req.body;
   try {
+    const { name, description } = req.body;
     //   auto generate slug from name
     const slug = name.toLowerCase().replace(/ /g, "-");
 
@@ -24,4 +25,17 @@ const createCategory = async (req, res) => {
   }
 };
 
-module.exports = { createCategory };
+// get all categories
+const getAllCategories = async (req, res) => {
+  try {
+    const category = await CategoryModel.find();
+    if (!category) {
+      res.status(404).json({ message: "Categories not found" });
+    }
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createCategory, getAllCategories };
