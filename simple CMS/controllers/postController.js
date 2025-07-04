@@ -47,4 +47,17 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getAllPosts };
+// get single post by id
+const getPostById = async (req, res) => {
+  try {
+    // return one post by id
+    const post = await PostModel.findById(req.params.id)
+      .populate("category")
+      .populate("author", "name email");
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createPost, getAllPosts, getPostById };
