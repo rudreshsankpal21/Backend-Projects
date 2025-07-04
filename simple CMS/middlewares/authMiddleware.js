@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 const authMiddleware = async (req, res, next) => {
   // Check if user is authenticated
   const token = req.headers.authorization?.split(" ")[1];
@@ -12,12 +13,14 @@ const authMiddleware = async (req, res, next) => {
   try {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (!decoded) {
+    if (!decoded?.id) {
       res.status(401).json({
-        message: "Unauthorized User",
+        message: "Invalid token payload",
       });
     }
-    req.user = decoded;
+
+    const user = await User.findById(decoded.id).select("-password");
+    req.user = user;
 
     next();
   } catch (error) {
