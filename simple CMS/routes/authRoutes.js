@@ -5,11 +5,10 @@ const {
   loginUser,
   getUsers,
 } = require("../controllers/authController");
-const isAdmin = require("../middlewares/isAdmin");
 authRouter.post("/register", registerUser);
 
 authRouter.post("/login", loginUser);
 
-authRouter.get("/users", isAdmin, getUsers);
+authRouter.get("/users", getUsers);
 
 module.exports = authRouter;
