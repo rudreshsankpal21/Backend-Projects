@@ -24,4 +24,17 @@ const createPoll = async (req, res) => {
   }
 };
 
-module.exports = { createPoll };
+// get all polls
+const getAllPolls = async (req, res) => {
+  try {
+    const polls = await Poll.find();
+    if (!polls) {
+      res.status(404).json({ message: "Polls not found" });
+    }
+    res.status(200).json(polls);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createPoll, getAllPolls };
