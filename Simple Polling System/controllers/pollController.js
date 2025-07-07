@@ -37,4 +37,16 @@ const getAllPolls = async (req, res) => {
   }
 };
 
-module.exports = { createPoll, getAllPolls };
+// get a single poll by id
+const getPollById = async (req, res) => {
+  try {
+    const poll = await Poll.findById(req.params.id);
+    if (!poll) {
+      res.status(404).json({ message: "Poll not found" });
+    }
+    res.status(200).json(poll);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+module.exports = { createPoll, getAllPolls, getPollById };
