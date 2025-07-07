@@ -1,5 +1,6 @@
 const express = require("express");
 const authMiddleware = require("../middlewares/authMiddleware");
+const { createPoll } = require("../controllers/pollController");
 const pollRouter = express.Router();
 
 // create poll
