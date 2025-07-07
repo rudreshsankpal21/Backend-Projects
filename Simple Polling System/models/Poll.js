@@ -19,9 +19,6 @@ const postSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
-      option: {
-        type: String,
-      },
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
