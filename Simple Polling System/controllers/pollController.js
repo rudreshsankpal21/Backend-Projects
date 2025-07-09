@@ -49,4 +49,7 @@ const getPollById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exports = { createPoll, getAllPolls, getPollById };
+
+// vote on poll
+const voteOnPoll = async (req, res) => {};
+module.exports = { createPoll, getAllPolls, getPollById, voteOnPoll };
