@@ -5,6 +5,8 @@ const {
   getAllPolls,
   getPollById,
   voteOnPoll,
+  deletePoll,
+  closePoll,
 } = require("../controllers/pollController");
 const pollRouter = express.Router();
 

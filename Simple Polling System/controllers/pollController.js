@@ -79,4 +79,47 @@ const voteOnPoll = async (req, res) => {
   }
 };
 
-module.exports = { createPoll, getAllPolls, getPollById, voteOnPoll };
+// close poll
+const closePoll = async (req, res) => {
+  try {
+    const poll = await Poll.findById(req.params.id);
+    if (!poll) {
+      res.status(404).json({ message: "Poll not found" });
+    }
+    if (poll.createdBy.toString() !== req.user._id) {
+      return res
+        .status(403)
+        .json({ message: "You are not authorized to close the poll" });
+    }
+    const updatedPoll = await Poll.findByIdAndUpdate(
+      req.params.id,
+      { isClosed: true },
+      { new: true }
+    );
+    res.status(200).json(updatedPoll);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// delete poll
+const deletePoll = async (req, res) => {
+  try {
+    const poll = await Poll.findByIdAndDelete(req.params.id);
+    if (!poll) {
+      res.status(404).json({ message: "Poll not found" });
+    }
+    res.status(200).json({ message: "Poll deleted successfully", poll });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  createPoll,
+  getAllPolls,
+  getPollById,
+  voteOnPoll,
+  closePoll,
+  deletePoll,
+};
