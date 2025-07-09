@@ -44,7 +44,14 @@ const getPollById = async (req, res) => {
     if (!poll) {
       res.status(404).json({ message: "Poll not found" });
     }
-    res.status(200).json(poll);
+
+    // count how many votes each option has
+    const votes = poll.votes.reduce((acc, vote) => {
+      acc[vote.option] = (acc[vote.option] || 0) + 1;
+      return acc;
+    }, {});
+
+    res.status(200).json({ poll, votes });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
