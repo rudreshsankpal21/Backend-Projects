@@ -51,5 +51,32 @@ const getPollById = async (req, res) => {
 };
 
 // vote on poll
-const voteOnPoll = async (req, res) => {};
+const voteOnPoll = async (req, res) => {
+  // chech if poll is open
+  try {
+    const poll = await Poll.findById(req.params.id);
+    if (!poll) {
+      res.status(404).json({ message: "Poll not found" });
+    }
+    if (poll.isClosed) {
+      return res.status(400).json({ message: "Poll is closed" });
+    }
+
+    // check is user already voted
+    if (poll.votes.some((vote) => vote.user.toString() === req.user._id)) {
+      return res.status(400).json({ message: "You have already voted" });
+    }
+
+    // update poll
+    const updatedPoll = await Poll.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { votes: { user: req.user._id } } },
+      { new: true }
+    );
+    res.status(200).json(updatedPoll);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = { createPoll, getAllPolls, getPollById, voteOnPoll };
