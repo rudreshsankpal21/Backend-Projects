@@ -1,6 +1,5 @@
 const express = require("express");
 const isAdmin = require("../middlewares/isAdmin");
-const { get } = require("mongoose");
 const resourceRouter = express.Router();
 
 // Create a resource
