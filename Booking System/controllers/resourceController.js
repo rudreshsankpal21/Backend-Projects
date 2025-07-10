@@ -24,4 +24,25 @@ const createResource = async (req, res) => {
   }
 };
 
-module.exports = { createResource };
+// get all resources
+const getAllResources = async (req, res) => {
+  try {
+    const { search } = req.query;
+    let resources;
+
+    if (search) {
+      const regex = new RegExp(search, "i");
+      resources = await Resource.find({
+        $or: [{ name: regex }, { description: regex }],
+      });
+    } else {
+      resources = await Resource.find();
+    }
+
+    res.status(200).json(resources);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createResource, getAllResources };

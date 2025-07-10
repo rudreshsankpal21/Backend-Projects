@@ -1,6 +1,9 @@
 const express = require("express");
 const isAdmin = require("../middlewares/isAdmin");
-const { createResource } = require("../controllers/resourceController");
+const {
+  createResource,
+  getAllResources,
+} = require("../controllers/resourceController");
 const resourceRouter = express.Router();
 
 // Create a resource
