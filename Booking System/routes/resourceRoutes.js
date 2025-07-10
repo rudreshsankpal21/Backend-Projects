@@ -7,10 +7,10 @@ const {
 const resourceRouter = express.Router();
 
 // Create a resource
-resourceRouter.post("/", isAdmin, createResource);
+resourceRouter.post("/", isAdmin, createResource); // ✅
 
 // get all resources
-resourceRouter.get("/", getAllResources);
+resourceRouter.get("/", getAllResources); // ✅
 
 // get a single resource
 resourceRouter.get("/:id", getResourceById);
