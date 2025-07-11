@@ -3,6 +3,7 @@ const isAdmin = require("../middlewares/isAdmin");
 const {
   createBooking,
   getUserBookings,
+  getAllBookings,
 } = require("../controllers/bookingController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingRouter = express.Router();
@@ -14,7 +15,7 @@ bookingRouter.post("/", authMiddleware, createBooking); // ✅
 bookingRouter.get("/my", authMiddleware, getUserBookings); // ✅
 
 // get all bookings
-bookingRouter.get("/", isAdmin, getAllBookings);
+bookingRouter.get("/", isAdmin, getAllBookings); // ✅
 
 // update status
 bookingRouter.put("/:id/status", isAdmin, updateStatus);
