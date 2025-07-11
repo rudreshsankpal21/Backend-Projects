@@ -45,4 +45,17 @@ const getAllResources = async (req, res) => {
   }
 };
 
-module.exports = { createResource, getAllResources };
+// get resource by id
+const getResourceById = async (req, res) => {
+  try {
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) {
+      return res.status(404).json({ message: "Resource not found" });
+    }
+    res.status(200).json(resource);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createResource, getAllResources, getResourceById };

@@ -3,6 +3,7 @@ const isAdmin = require("../middlewares/isAdmin");
 const {
   createResource,
   getAllResources,
+  getResourceById,
 } = require("../controllers/resourceController");
 const resourceRouter = express.Router();
 
