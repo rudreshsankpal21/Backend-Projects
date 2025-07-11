@@ -4,6 +4,7 @@ const {
   createResource,
   getAllResources,
   getResourceById,
+  updateResource,
 } = require("../controllers/resourceController");
 const resourceRouter = express.Router();
 
@@ -14,7 +15,7 @@ resourceRouter.post("/", isAdmin, createResource); // ✅
 resourceRouter.get("/", getAllResources); // ✅
 
 // get a single resource
-resourceRouter.get("/:id", getResourceById);
+resourceRouter.get("/:id", getResourceById); // ✅
 
 // update a resource
 resourceRouter.put("/:id", isAdmin, updateResource);

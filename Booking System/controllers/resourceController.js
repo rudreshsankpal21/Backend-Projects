@@ -58,4 +58,26 @@ const getResourceById = async (req, res) => {
   }
 };
 
-module.exports = { createResource, getAllResources, getResourceById };
+// update a resource
+const updateResource = async (req, res) => {
+  try {
+    const resource = await Resource.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!resource) {
+      return res.status(404).json({ message: "Resource not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Resource updated successfully", resource });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  createResource,
+  getAllResources,
+  getResourceById,
+  updateResource,
+};
