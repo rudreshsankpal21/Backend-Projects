@@ -5,6 +5,7 @@ const {
   getAllResources,
   getResourceById,
   updateResource,
+  deleteResource,
 } = require("../controllers/resourceController");
 const resourceRouter = express.Router();
 
