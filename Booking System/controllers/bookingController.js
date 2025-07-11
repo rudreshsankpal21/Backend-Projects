@@ -38,6 +38,17 @@ const createBooking = async (req, res) => {
   } catch (error) {}
 };
 
+// get user's booking
+const getUserBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ user: req.user._id });
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createBooking,
+  getUserBookings,
 };

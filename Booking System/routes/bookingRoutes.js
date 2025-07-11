@@ -1,13 +1,17 @@
 const express = require("express");
 const isAdmin = require("../middlewares/isAdmin");
-const { createBooking } = require("../controllers/bookingController");
+const {
+  createBooking,
+  getUserBookings,
+} = require("../controllers/bookingController");
+const authMiddleware = require("../middlewares/authMiddleware");
 const bookingRouter = express.Router();
 
 // create a booking
-bookingRouter.post("/", createBooking); // ✅
+bookingRouter.post("/", authMiddleware, createBooking); // ✅
 
 // get user's booking
-bookingRouter.get("/my", getUserBookings);
+bookingRouter.get("/my", authMiddleware, getUserBookings); // ✅
 
 // get all bookings
 bookingRouter.get("/", isAdmin, getAllBookings);
@@ -19,6 +23,6 @@ bookingRouter.put("/:id/status", isAdmin, updateStatus);
 bookingRouter.delete("/:id", isAdmin, deleteBooking);
 
 // cancel/delete booking
-bookingRouter.delete("/:id/cancel", cancelBooking);
+bookingRouter.delete("/:id/cancel", authMiddleware, cancelBooking);
 
 module.exports = bookingRouter;
