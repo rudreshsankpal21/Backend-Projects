@@ -1,9 +1,10 @@
 const express = require("express");
 const isAdmin = require("../middlewares/isAdmin");
+const { createBooking } = require("../controllers/bookingController");
 const bookingRouter = express.Router();
 
 // create a booking
-bookingRouter.post("/", createBooking);
+bookingRouter.post("/", createBooking); // ✅
 
 // get user's booking
 bookingRouter.get("/my", getUserBookings);
