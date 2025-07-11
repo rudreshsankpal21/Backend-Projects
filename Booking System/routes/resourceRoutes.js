@@ -19,9 +19,9 @@ resourceRouter.get("/", getAllResources); // ✅
 resourceRouter.get("/:id", getResourceById); // ✅
 
 // update a resource
-resourceRouter.put("/:id", isAdmin, updateResource);
+resourceRouter.put("/:id", isAdmin, updateResource); // ✅
 
 // delete a resource
-resourceRouter.delete("/:id", isAdmin, deleteResource);
+resourceRouter.delete("/:id", isAdmin, deleteResource); // ✅
 
 module.exports = resourceRouter;
