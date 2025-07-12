@@ -5,6 +5,7 @@ const {
   getUserBookings,
   getAllBookings,
   updateStatus,
+  deleteBooking,
 } = require("../controllers/bookingController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingRouter = express.Router();
