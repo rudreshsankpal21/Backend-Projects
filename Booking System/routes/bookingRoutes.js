@@ -4,6 +4,7 @@ const {
   createBooking,
   getUserBookings,
   getAllBookings,
+  updateStatus,
 } = require("../controllers/bookingController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingRouter = express.Router();
@@ -18,7 +19,7 @@ bookingRouter.get("/my", authMiddleware, getUserBookings); // ✅
 bookingRouter.get("/", isAdmin, getAllBookings); // ✅
 
 // update status
-bookingRouter.put("/:id/status", isAdmin, updateStatus);
+bookingRouter.put("/:id/status", isAdmin, updateStatus); // ✅
 
 // delete a booking
 bookingRouter.delete("/:id", isAdmin, deleteBooking);
