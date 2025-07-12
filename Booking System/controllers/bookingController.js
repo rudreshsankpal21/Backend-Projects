@@ -95,10 +95,32 @@ const deleteBooking = async (req, res) => {
   }
 };
 
+// Cancel booking
+const cancelBooking = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const booking = await Booking.findByIdAndDelete(id);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "Booking cancelled successfully", booking });
+
+    // remove booking from user's bookings
+    const user = await User.findById(req.user._id);
+    user.bookings.pull(booking._id);
+    await user.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createBooking,
   getUserBookings,
   getAllBookings,
   updateStatus,
   deleteBooking,
+  cancelBooking,
 };

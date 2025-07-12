@@ -6,6 +6,7 @@ const {
   getAllBookings,
   updateStatus,
   deleteBooking,
+  cancelBooking,
 } = require("../controllers/bookingController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingRouter = express.Router();
@@ -25,7 +26,7 @@ bookingRouter.put("/:id/status", isAdmin, updateStatus); // ✅
 // delete a booking
 bookingRouter.delete("/:id", isAdmin, deleteBooking); // ✅
 
-// cancel/delete booking
-bookingRouter.delete("/:id/cancel", authMiddleware, cancelBooking);
+// cancel booking
+bookingRouter.delete("/:id/cancel", authMiddleware, cancelBooking); // ✅
 
 module.exports = bookingRouter;
