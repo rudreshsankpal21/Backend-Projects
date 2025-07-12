@@ -22,7 +22,7 @@ bookingRouter.get("/", isAdmin, getAllBookings); // ✅
 bookingRouter.put("/:id/status", isAdmin, updateStatus); // ✅
 
 // delete a booking
-bookingRouter.delete("/:id", isAdmin, deleteBooking);
+bookingRouter.delete("/:id", isAdmin, deleteBooking); // ✅
 
 // cancel/delete booking
 bookingRouter.delete("/:id/cancel", authMiddleware, cancelBooking);
