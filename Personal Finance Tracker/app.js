@@ -10,6 +10,6 @@ app.use(express.json());
 
 // routes
 app.use("/api/auth", authRouter);
-app.use("/api/transactions", transactionRouter);
+app.use("/api/transactions", authMiddleware, transactionRouter);
 app.use("/api/insights", authMiddleware, insightRouter);
 module.exports = app;
