@@ -71,7 +71,31 @@ const getTransactionById = async (req, res) => {
 };
 
 // update a transaction
-const updateTransaction = async (req, res) => {};
+const updateTransaction = async (req, res) => {
+  try {
+    const transaction = await Transaction.findByIdAndUpdate(
+      req.params.id,
+      req.body
+    );
+    if (!transaction) {
+      res.status(400).json({
+        message: "Failed to update Transaction",
+      });
+    }
+    res.status(200).json({
+      message: "Transaction updated successfully",
+      transaction,
+    });
+
+    // save the transaction
+    await transaction.save();
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 // delete a transaction
 const deleteTransaction = async (req, res) => {};
