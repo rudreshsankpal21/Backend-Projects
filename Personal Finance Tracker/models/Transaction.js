@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 // Transaction Model
-
 const transactionSchema = new mongoose.Schema(
   {
     title: {
