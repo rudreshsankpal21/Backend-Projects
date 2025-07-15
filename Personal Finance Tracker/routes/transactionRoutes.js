@@ -15,7 +15,7 @@ transactionRouter.post("/create", authMiddleware, createTransaction);
 // get all transaction of a user
 transactionRouter.get("/all", authMiddleware, getAllTransactions);
 
-// get a transactions of a user
+// get a transaction by id
 transactionRouter.get("/user/:id", authMiddleware, getTransactionById);
 
 // update a transaction

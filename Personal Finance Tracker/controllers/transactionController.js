@@ -49,7 +49,26 @@ const getAllTransactions = async (req, res) => {
   }
 };
 
-const getTransactionById = async (req, res) => {};
+// get a transaction by id
+const getTransactionById = async (req, res) => {
+  try {
+    const transaction = await Transaction.findById(req.params.id);
+    if (!transaction) {
+      res.status(400).json({
+        message: "Failed to get Transaction",
+      });
+    }
+    res.status(200).json({
+      message: "Transaction fetched successfully",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 // update a transaction
 const updateTransaction = async (req, res) => {};
