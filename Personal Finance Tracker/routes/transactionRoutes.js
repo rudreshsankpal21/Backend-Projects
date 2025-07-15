@@ -12,10 +12,10 @@ const transactionRouter = express.Router();
 // create a new transaction
 transactionRouter.post("/create", authMiddleware, createTransaction);
 
-// get all transactions
+// get all transaction of a user
 transactionRouter.get("/all", authMiddleware, getAllTransactions);
 
-// get all transactions of a user
+// get a transactions of a user
 transactionRouter.get("/user/:id", authMiddleware, getTransactionById);
 
 // update a transaction

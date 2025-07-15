@@ -28,10 +28,27 @@ const createTransaction = async (req, res) => {
   }
 };
 
-// Get all transactions
-const getAllTransactions = async (req, res) => {};
-
 // get all transaction of a user
+const getAllTransactions = async (req, res) => {
+  try {
+    const transaction = await Transaction.find({ user: req.user._id });
+    if (!transaction) {
+      res.status(400).json({
+        message: "Failed to get Transaction",
+      });
+    }
+    res.status(200).json({
+      message: "Transaction fetched successfully",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
+
 const getTransactionById = async (req, res) => {};
 
 // update a transaction
