@@ -98,7 +98,25 @@ const updateTransaction = async (req, res) => {
 };
 
 // delete a transaction
-const deleteTransaction = async (req, res) => {};
+const deleteTransaction = async (req, res) => {
+  try {
+    const transaction = await Transaction.findByIdAndDelete(req.params.id);
+    if (!transaction) {
+      res.status(400).json({
+        message: "Failed to delete Transaction",
+      });
+    }
+    res.status(200).json({
+      message: "Transaction deleted successfully",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 module.exports = {
   createTransaction,
