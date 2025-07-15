@@ -10,7 +10,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const transactionRouter = express.Router();
 
 // create a new transaction
-transactionRouter.post("/create", authMiddleware, createTransaction);
+transactionRouter.post("/", authMiddleware, createTransaction);
 
 // get all transaction of a user
 transactionRouter.get("/all", authMiddleware, getAllTransactions);
