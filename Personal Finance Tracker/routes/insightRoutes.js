@@ -2,7 +2,7 @@ const express = require("express");
 const insightRouter = express.Router();
 
 // get summary
-insightRouter.get("/summary", getSummary);
+insightRouter.get("/summary", getTransactionSummary);
 
 // get expenses by category
 insightRouter.get("/expenses-by-category", getExpensesByCategory);
