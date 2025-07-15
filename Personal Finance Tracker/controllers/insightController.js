@@ -30,7 +30,45 @@ const getTransactionSummary = async (req, res) => {
 };
 
 // get expenses by category
-const getExpensesByCategory = async (req, res) => {};
+const getExpensesByCategory = async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ user: req.user._id });
+
+    // fetch expenses by category
+    const expensesByCategory = transactions.reduce((acc, transaction) => {
+      const { category, amount } = transaction;
+      if (transaction.type === "expense") {
+        acc[category] = (acc[category] || 0) + amount;
+      }
+      return acc;
+    }, {});
+
+    const aggregatedExpenses = await Transaction.aggregate([
+      {
+        $match: {
+          user: req.user._id,
+          type: "expense",
+        },
+      },
+      {
+        $group: {
+          _id: "$category",
+          totalAmount: { $sum: "$amount" },
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      expensesByCategory,
+      aggregatedExpenses,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 // get monthly expenses
 const getMonthlySummary = async (req, res) => {};

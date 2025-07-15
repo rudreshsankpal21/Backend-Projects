@@ -12,7 +12,7 @@ const insightRouter = express.Router();
 insightRouter.get("/summary", getTransactionSummary); //✅
 
 // get expenses by category
-insightRouter.get("/expenses-by-category", getExpensesByCategory);
+insightRouter.get("/expenses-by-category", getExpensesByCategory); //✅
 
 // get monthly expenses
 insightRouter.get("/monthly-summary", getMonthlySummary);
