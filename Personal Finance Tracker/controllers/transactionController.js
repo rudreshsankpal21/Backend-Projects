@@ -31,15 +31,24 @@ const createTransaction = async (req, res) => {
 // get all transaction of a user
 const getAllTransactions = async (req, res) => {
   try {
-    const transaction = await Transaction.find({ user: req.user._id });
-    if (!transaction) {
+    const { type } = req.query; // Get ?type= from query
+
+    let query = { user: req.user._id };
+    if (type) {
+      query.type = type;
+    }
+
+    const transactions = await Transaction.find(query);
+
+    if (transactions.length === 0) {
       res.status(400).json({
-        message: "Failed to get Transaction",
+        message: "No transactions found for the specified filter",
       });
     }
+
     res.status(200).json({
       message: "Transaction fetched successfully",
-      transaction,
+      transactions,
     });
   } catch (error) {
     res.status(500).json({
