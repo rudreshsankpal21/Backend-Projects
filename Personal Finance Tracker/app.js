@@ -12,4 +12,5 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/transactions", authMiddleware, transactionRouter);
 app.use("/api/insights", authMiddleware, insightRouter);
+
 module.exports = app;
