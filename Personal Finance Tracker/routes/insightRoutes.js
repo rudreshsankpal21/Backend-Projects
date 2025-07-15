@@ -1,4 +1,11 @@
 const express = require("express");
+const {
+  getTransactionSummary,
+  getExpensesByCategory,
+  getMonthlySummary,
+  getRecentTransactions,
+} = require("../controllers/insightController");
+
 const insightRouter = express.Router();
 
 // get summary
