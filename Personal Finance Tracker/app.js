@@ -1,8 +1,8 @@
 const express = require("express");
 const authRouter = require("./routes/authRoutes");
 const transactionRouter = require("./routes/transactionRoutes");
-const authMiddleware = require("../middlewares/authMiddleware");
 const insightRouter = require("./routes/insightRoutes");
+const authMiddleware = require("./middlewares/authMiddleware");
 const app = express();
 
 // middlewares
