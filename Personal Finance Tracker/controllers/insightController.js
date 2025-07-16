@@ -71,7 +71,42 @@ const getExpensesByCategory = async (req, res) => {
 };
 
 // get monthly expenses
-const getMonthlySummary = async (req, res) => {};
+const getMonthlySummary = async (req, res) => {
+  try {
+    const expensesByMonth = await Transaction.aggregate([
+      {
+        $match: {
+          user: req.user._id,
+          type: "expense",
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$date" },
+            month: { $month: "$date" },
+          },
+          totalAmount: { $sum: "$amount" },
+        },
+      },
+      {
+        $sort: {
+          "_id.month": 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      message: "Monthly expenses fetched successfully",
+      expensesByMonth,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 // get recent transactions
 const getRecentTransactions = async (req, res) => {};

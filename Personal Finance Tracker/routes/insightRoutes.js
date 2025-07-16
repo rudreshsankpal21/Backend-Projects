@@ -15,7 +15,7 @@ insightRouter.get("/summary", getTransactionSummary); //✅
 insightRouter.get("/expenses-by-category", getExpensesByCategory); //✅
 
 // get monthly expenses
-insightRouter.get("/monthly-summary", getMonthlySummary); // pending
+insightRouter.get("/monthly-summary", getMonthlySummary); // ✅
 
 // get recent transactions
 insightRouter.get("/recent", getRecentTransactions); // pending
