@@ -109,7 +109,22 @@ const getMonthlySummary = async (req, res) => {
 };
 
 // get recent transactions
-const getRecentTransactions = async (req, res) => {};
+const getRecentTransactions = async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ user: req.user._id })
+      .sort({ createdAt: -1 })
+      .limit(15);
+    res.status(200).json({
+      message: "Recent transactions fetched successfully",
+      transactions,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 module.exports = {
   getTransactionSummary,

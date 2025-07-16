@@ -18,6 +18,6 @@ insightRouter.get("/expenses-by-category", getExpensesByCategory); //✅
 insightRouter.get("/monthly-summary", getMonthlySummary); // ✅
 
 // get recent transactions
-insightRouter.get("/recent", getRecentTransactions); // pending
+insightRouter.get("/recent", getRecentTransactions); // ✅
 
 module.exports = insightRouter;
