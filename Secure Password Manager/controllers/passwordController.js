@@ -83,9 +83,30 @@ const updatePassword = async (req, res) => {
   }
 };
 
+// delete a password
+const deletePassword = async (req, res) => {
+  try {
+    const password = await Password.findById(req.params.id);
+    if (!password) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    const deletePassword = await Password.findByIdAndDelete(req.params.id);
+
+    if (!deletePassword) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    res.status(200).json({ message: "Password deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllPasswords,
   getPasswordById,
   addPassword,
   updatePassword,
+  deletePassword,
 };

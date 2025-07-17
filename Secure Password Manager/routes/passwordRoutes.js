@@ -4,6 +4,7 @@ const {
   getPasswordById,
   addPassword,
   updatePassword,
+  deletePassword,
 } = require("../controllers/passwordController");
 const passwordRouter = express.Router();
 
@@ -20,6 +21,6 @@ passwordRouter.get("/:id", getPasswordById); // ✅
 passwordRouter.put("/:id", updatePassword); // ✅
 
 // Delete a Password
-passwordRouter.delete("/:id", deletePassword);
+passwordRouter.delete("/:id", deletePassword); // ✅
 
 module.exports = passwordRouter;
