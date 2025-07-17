@@ -118,7 +118,7 @@ const searchPasswords = async (req, res) => {
 
     const results = await Password.find({
       user: req.user.id,
-      website: { $regex: searchQuery, $options: "i" },
+      serviceName: { $regex: searchQuery, $options: "i" },
     });
 
     if (results.length === 0) {
