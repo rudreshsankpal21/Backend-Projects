@@ -1,11 +1,12 @@
 const Password = require("../models/Password");
 const bcrypt = require("bcryptjs");
+const { encrypt } = require("../utils/encryption");
 // create a password
 const addPassword = async (req, res) => {
   const { serviceName, emailOrUsername, password } = req.body;
   try {
-    // hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // encrypt password
+    const encrypted = encrypt(password);
 
     if (!serviceName || !emailOrUsername || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -15,7 +16,8 @@ const addPassword = async (req, res) => {
       User: req.user._id,
       serviceName,
       emailOrUsername,
-      password: hashedPassword,
+      password: encrypted.encryptedData,
+      iv: encrypted.iv,
     });
 
     if (!newPassword) {
