@@ -5,6 +5,7 @@ const {
   addPassword,
   updatePassword,
   deletePassword,
+  searchPasswords,
 } = require("../controllers/passwordController");
 const passwordRouter = express.Router();
 
@@ -22,5 +23,8 @@ passwordRouter.put("/:id", updatePassword); // ✅
 
 // Delete a Password
 passwordRouter.delete("/:id", deletePassword); // ✅
+
+// search passwords
+passwordRouter.get("/search", searchPasswords); // ✅
 
 module.exports = passwordRouter;

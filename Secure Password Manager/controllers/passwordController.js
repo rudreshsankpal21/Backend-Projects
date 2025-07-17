@@ -110,10 +110,32 @@ const deletePassword = async (req, res) => {
   }
 };
 
+// search password
+
+const searchPasswords = async (req, res) => {
+  try {
+    const searchQuery = req.query.query;
+
+    const results = await Password.find({
+      user: req.user.id,
+      website: { $regex: searchQuery, $options: "i" },
+    });
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "No passwords found" });
+    }
+
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllPasswords,
   getPasswordById,
   addPassword,
   updatePassword,
   deletePassword,
+  searchPasswords,
 };
