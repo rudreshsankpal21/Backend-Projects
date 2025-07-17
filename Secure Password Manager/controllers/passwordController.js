@@ -1,4 +1,32 @@
 const Password = require("../models/Password");
+const bcrypt = require("bcryptjs");
+// create a password
+const addPassword = async (req, res) => {
+  const { serviceName, emailOrUsername, password } = req.body;
+  try {
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!serviceName || !emailOrUsername || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newPassword = await Password.create({
+      User: req.user._id,
+      serviceName,
+      emailOrUsername,
+      password: hashedPassword,
+    });
+
+    if (!newPassword) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    res
+      .status(201)
+      .json({ message: "Password created successfully", newPassword });
+  } catch (error) {}
+};
 
 // get all passwords of user
 const getAllPasswords = async (req, res) => {
@@ -31,4 +59,5 @@ const getPasswordById = async (req, res) => {
 module.exports = {
   getAllPasswords,
   getPasswordById,
+  addPassword,
 };
