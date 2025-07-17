@@ -1,6 +1,7 @@
 const Password = require("../models/Password");
 const bcrypt = require("bcryptjs");
-const { encrypt } = require("../utils/encryption");
+
+const { encrypt, decrypt } = require("../utils/encryption");
 // create a password
 const addPassword = async (req, res) => {
   const { serviceName, emailOrUsername, password } = req.body;
@@ -33,13 +34,17 @@ const addPassword = async (req, res) => {
 // get all passwords of user
 const getAllPasswords = async (req, res) => {
   try {
-    const passwords = await Password.find({ User: req.user._id });
+    const entries = await Password.find({ User: req.user._id });
 
-    if (!passwords) {
+    if (!entries) {
       return res.status(404).json({ message: "No passwords found" });
     }
+    const decryptedEntries = entries.map((entry) => ({
+      ...entry._doc,
+      password: decrypt(entry.password, entry.iv),
+    }));
 
-    res.status(200).json(passwords);
+    res.status(200).json(decryptedEntries);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
