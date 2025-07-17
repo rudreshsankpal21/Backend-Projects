@@ -1,5 +1,8 @@
 const express = require("express");
-const { getAllPasswords } = require("../controllers/passwordController");
+const {
+  getAllPasswords,
+  getPasswordById,
+} = require("../controllers/passwordController");
 const passwordRouter = express.Router();
 
 // get all passwords of user
