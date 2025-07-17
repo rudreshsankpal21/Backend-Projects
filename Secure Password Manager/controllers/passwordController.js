@@ -56,8 +56,36 @@ const getPasswordById = async (req, res) => {
   }
 };
 
+// update a password
+const updatePassword = async (req, res) => {
+  try {
+    const password = await Password.findById(req.params.id);
+    if (!password) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    const updatedPassword = await Password.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedPassword) {
+      return res.status(404).json({ message: "Password not found" });
+    }
+
+    res.status(200).json({
+      message: "Password updated successfully",
+      updatedPassword,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllPasswords,
   getPasswordById,
   addPassword,
+  updatePassword,
 };

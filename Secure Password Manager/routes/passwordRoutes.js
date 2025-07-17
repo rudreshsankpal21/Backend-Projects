@@ -3,20 +3,21 @@ const {
   getAllPasswords,
   getPasswordById,
   addPassword,
+  updatePassword,
 } = require("../controllers/passwordController");
 const passwordRouter = express.Router();
 
 // Add a new Password
-passwordRouter.post("/", addPassword);
+passwordRouter.post("/", addPassword); // ✅
 
 // get all passwords of user
-passwordRouter.get("/", getAllPasswords);
+passwordRouter.get("/", getAllPasswords); // ✅
 
 // get one password by ID
-passwordRouter.get("/:id", getPasswordById);
+passwordRouter.get("/:id", getPasswordById); // ✅
 
 // Update a Password
-passwordRouter.put("/:id", updatePassword);
+passwordRouter.put("/:id", updatePassword); // ✅
 
 // Delete a Password
 passwordRouter.delete("/:id", deletePassword);
