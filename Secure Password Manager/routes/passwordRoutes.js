@@ -2,7 +2,7 @@ const express = require("express");
 const passwordRouter = express.Router();
 
 // get all passwords of user
-passwordRouter.get("/", authMieware, getAllPasswords);
+passwordRouter.get("/", getAllPasswords);
 
 // get one password by ID
 passwordRouter.get("/:id", getPasswordById);
