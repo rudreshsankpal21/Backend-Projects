@@ -1,8 +1,9 @@
 const express = require("express");
+const { getAllUsers } = require("../controllers/adminController");
 const adminRouter = express.Router();
 
 // list all users
-adminRouter.get("/users", getAllUsers);
+adminRouter.get("/users", getAllUsers); // ✅
 
 // list all transactions
 adminRouter.get("/transactions", getAllTransactions);
