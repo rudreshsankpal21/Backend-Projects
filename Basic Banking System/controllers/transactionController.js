@@ -42,10 +42,17 @@ const withdraw = async (req, res) => {
       });
     }
 
+    // low balance
+    if (user.balance < 100) {
+      return res.status(400).json({
+        message: "Warning: Your balance is low",
+      });
+    }
+
     // no withdrawal allowed if balance is 0
     if (user.balance === 0) {
       return res.status(400).json({
-        message: "Warning: Your balance is low, withdrawal not allowed",
+        message: "withdrawal not allowed if balance is 0",
       });
     }
 
