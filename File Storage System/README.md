@@ -123,7 +123,7 @@ A secure backend application built with **Node.js**, **Express**, **MongoDB**, a
 
 ## 🚀 Author
 
-**Your Name** – Rudresh
+Built with ❤️ By Rudresh
 
 ---
 ````
