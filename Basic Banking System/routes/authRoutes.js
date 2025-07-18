@@ -14,6 +14,4 @@ authRouter.post("/login", loginUser);
 
 authRouter.get("/logout", logout);
 
-authRouter.get("/users", isAdmin, getUsers);
-
 module.exports = authRouter;
