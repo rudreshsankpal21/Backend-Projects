@@ -19,6 +19,6 @@ transactionRouter.post("/withdraw", authMiddleware, withdraw); // ✅
 transactionRouter.post("/transfer", authMiddleware, transfer); // ✅
 
 // get transaction history
-transactionRouter.get("/history", authMiddleware, transactionHistory);
+transactionRouter.get("/history", authMiddleware, transactionHistory); // ✅
 
 module.exports = transactionRouter;

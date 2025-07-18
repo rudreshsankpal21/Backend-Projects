@@ -129,6 +129,9 @@ const transfer = async (req, res) => {
 const transactionHistory = async (req, res) => {
   try {
     const transactions = await Transaction.find({ user: req.user._id });
+    if (!transactions) {
+      return res.status(404).json({ message: "Transactions not found" });
+    }
     res.status(200).json({ transactions });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
