@@ -15,6 +15,6 @@ transactionRouter.post("/deposite", authMiddleware, deposite); // ✅
 transactionRouter.post("/withdraw", authMiddleware, withdraw); // ✅
 
 // transfer Balance
-transactionRouter.post("/transfer", authMiddleware, transfer);
+transactionRouter.post("/transfer", authMiddleware, transfer); // ✅
 
 module.exports = transactionRouter;

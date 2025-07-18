@@ -76,7 +76,54 @@ const withdraw = async (req, res) => {
 };
 
 // transfer balance
-const transfer = async (req, res) => {};
+const transfer = async (req, res) => {
+  const { toUser, amount } = req.body;
+  try {
+    if (!toUser || !amount || amount <= 0) {
+      return res.status(400).json({ message: "Invalid transfer details" });
+    }
+
+    // Fetch sender
+    const sender = await User.findById(req.user._id);
+    if (!sender) {
+      return res.status(404).json({ message: "Sender not found" });
+    }
+
+    // Check balance
+    if (sender.balance < amount) {
+      return res.status(400).json({ message: "Insufficient balance" });
+    }
+
+    // Fetch receiver
+    const receiver = await User.findById(toUser);
+    if (!receiver) {
+      return res.status(404).json({ message: "Receiver not found" });
+    }
+
+    // Update balances
+    sender.balance -= amount;
+    receiver.balance += amount;
+
+    // Save updates
+    await sender.save();
+    await receiver.save();
+
+    // Record transaction
+    const transaction = await Transaction.create({
+      user: sender._id,
+      toUser,
+      type: "transfer",
+      amount,
+    });
+
+    res.status(200).json({
+      message: "Amount transferred successfully",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 
 module.exports = {
   deposite,
