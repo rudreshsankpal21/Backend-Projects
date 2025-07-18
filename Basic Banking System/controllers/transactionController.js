@@ -1,7 +1,34 @@
 const Transaction = require("../models/Transaction");
 
 // deposite balance
-const deposite = async (req, res) => {};
+const deposite = async (req, res) => {
+  const { amount } = req.body;
+  try {
+    //  add balance to the account
+    const transaction = await Transaction.create({
+      user: req.user._id,
+      toUser: req.user._id,
+      type: "deposit",
+      amount,
+    });
+
+    if (!transaction) {
+      res.status(400).json({
+        message: "Failed depositing the amount",
+      });
+    }
+
+    res.status(200).json({
+      message: "successfully deposited the amount",
+      transaction,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server error",
+      error,
+    });
+  }
+};
 
 // withdraw balance
 const withdraw = async (req, res) => {};
