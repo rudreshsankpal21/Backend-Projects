@@ -125,8 +125,19 @@ const transfer = async (req, res) => {
   }
 };
 
+// get transaction history
+const transactionHistory = async (req, res) => {
+  try {
+    const transactions = await Transaction.find({ user: req.user._id });
+    res.status(200).json({ transactions });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   deposite,
   withdraw,
   transfer,
+  transactionHistory,
 };

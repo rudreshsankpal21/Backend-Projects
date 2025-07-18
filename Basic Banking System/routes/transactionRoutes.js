@@ -6,6 +6,7 @@ const {
   deposite,
   withdraw,
   transfer,
+  transactionHistory,
 } = require("../controllers/transactionController");
 
 //  deposite Balance
@@ -16,5 +17,8 @@ transactionRouter.post("/withdraw", authMiddleware, withdraw); // ✅
 
 // transfer Balance
 transactionRouter.post("/transfer", authMiddleware, transfer); // ✅
+
+// get transaction history
+transactionRouter.get("/history", authMiddleware, transactionHistory);
 
 module.exports = transactionRouter;
