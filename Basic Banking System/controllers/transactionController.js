@@ -45,7 +45,7 @@ const withdraw = async (req, res) => {
     // no withdrawal allowed if balance is 0
     if (user.balance === 0) {
       return res.status(400).json({
-        message: "No withdrawal allowed as your balance is 0",
+        message: "Warning: Your balance is low, withdrawal not allowed",
       });
     }
 
