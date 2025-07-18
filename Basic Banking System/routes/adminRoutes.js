@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getAllUsers,
   getAllTransactions,
+  getUserById,
 } = require("../controllers/adminController");
 const adminRouter = express.Router();
 
@@ -12,7 +13,7 @@ adminRouter.get("/users", getAllUsers); // ✅
 adminRouter.get("/transactions", getAllTransactions); // ✅
 
 // get user by id
-adminRouter.get("/users/:id", getUserById);
+adminRouter.get("/users/:id", getUserById); // ✅
 
 // delete user
 adminRouter.delete("/users/:id", deleteUser);
