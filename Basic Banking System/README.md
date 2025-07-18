@@ -135,7 +135,7 @@ Simple-Banking-System/
 
 ---
 
-## **Extras We Added** 🌟
+## **Extras Added in it** 🌟
 
 - **Low Balance Alert**: Alert when balance < ₹100.
 - **Role-Based Authorization** (user vs admin).
