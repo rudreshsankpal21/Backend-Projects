@@ -1,6 +1,6 @@
 # **🔥 MERN-Backend Projects Portfolio**
 
-This repository showcases **8 real-world backend projects**, each crafted with **Node.js, Express, and MongoDB** to demonstrate **clean architecture**, **scalable APIs**, and **production-level code quality**.
+This repository showcases **8 real-world backend projects (beginner/intermediate)**, each crafted with **Node.js, Express, and MongoDB** to demonstrate **clean architecture**, **scalable APIs**, and **production-level code quality**.
 
 I built these projects with a **27-day coding streak**, combining my own logic, debugging skills, and AI tools like ChatGPT and Windsurf for code reviews and optimizations.
 
